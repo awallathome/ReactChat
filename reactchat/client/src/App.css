@@ -1,24 +1,66 @@
-.App {
-  text-align: center;
+/* General */
+html {
+  font-family: Quicksand, sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+h6 {
+  color: #2196f3;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+/* Header */
+#logo {
+  font-weight: bold;
 }
 
-.App-intro {
-  font-size: large;
+/* Input Section */
+#message {
+  padding-left: 20px;
+  font-size: 18pt;
+}
+.bubble {
+  border-radius: 25px !important;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#sendMessage {
+  font-weight: bold;
+  margin-top: 14px;
+  margin-left: 10px;
+  padding-top: 7px;
+  width: 44px;
+  height: 44px;
+}
+
+/* Messages Section */
+#messageArea {
+  padding-top: 50px;
+  padding-bottom: 150px;
+}
+/* Fake Messages Section */
+#messageArea2 {
+  padding-top: 50px;
+  padding-bottom: 150px;
+}
+
+#messages {
+  font-size: 18pt;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+/* Footer */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
 }
