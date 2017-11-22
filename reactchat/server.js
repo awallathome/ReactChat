@@ -1,19 +1,56 @@
-const express = require("express");
-const path = require("path");
-const PORT = process.env.PORT || 3001;
-const app = express();
+// Dependeincies
+var express = require("express");
+var path = require("path");
+var app = express();
+var http = require("http").Server(app);
+var ioConnect = require("./config/io")(http);
+var connection = require("./config/connection");
+var messageJS = require("./models/message.js");
+var exphbs = require("express-handlebars");
+var bodyParser = require("body-parser");
+var orm = require("./config/orm");
+var routes = require("./controllers/controller.js");
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// Port
+var port = process.env.PORT || 3000;
+console.log("Now running on port " + port + ".");
 
-// Send every request to the React app
-// Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+// Set body-parser middleware to handle forms and json data
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Set handlebars as the main engine
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// Set public directory as default location for static content
+app.use(express.static("public"));
+
+// Socket.io functions
+ioConnect.on("connection", function(socket) {
+  // Log connection
+  console.log("User connected.");
+  // Get all messages from database upon connecting
+  socket.on("messages", function(messages) {
+    ioConnect.emit("messages", messages);
+  });
+
+  // If user sends a message
+  socket.on("message", function(message) {
+    ioConnect.emit("message", message);
+    messageJS.create(message, function(response) {
+      console.log("User sent a message.");
+    });
+  });
+
+  // If user disconnects
+  socket.on("disconnect", function() {
+    console.log("User disconnected.");
+  });
 });
 
-app.listen(PORT, function() {
-  console.log(`🌎 ==> Server now on port ${PORT}!`);
-});
+// On every route, use the routes middleware
+app.use("/", routes);
+
+// Listener
+http.listen(port);

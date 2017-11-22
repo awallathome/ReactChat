@@ -1,24 +1,66 @@
-.App {
-  text-align: center;
+/* General */
+html {
+  font-family: Quicksand, sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.container {
+  width: 90%;
+  padding-left: 10px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+h6 {
+  color: #2196f3;
 }
 
-.App-intro {
-  font-size: large;
+/* Header */
+#logo {
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.nav-wrapper  {
+  color: #2A3132;
+}
+
+/* Input Section */
+#message {
+  padding-left: 20px;
+  font-size: 18pt;
+}
+.bubble {
+  border-radius: 25px !important;
+}
+
+#sendMessage {
+  font-weight: bold;
+  margin-top: 14px;
+  margin-left: 10px;
+  padding-top: 7px;
+  width: 44px;
+  height: 44px;
+}
+
+/* Convo Section */
+#messageArea {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.row {
+  margin: auto;
+}
+
+/* Decoy Convo */
+#messageArea2 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#messages {
+  font-size: 18pt;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.page-footer {
+
 }
