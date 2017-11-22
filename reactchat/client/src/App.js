@@ -29,12 +29,52 @@ const fakeData = [
   message: "Too early for a Celebration?"
 }];
 
+const realData = [
+  {
+    id: 1,
+    name: "Jill",
+    message: "User result came in. They were decent."
+  },
+  {
+    id: 2,
+    name: "Real",
+    message: "Data"
+  },
+  {
+    id: 3,
+    name: "Real",
+    message:
+      "Stuff"
+  },
+  {
+    id: 4,
+    name: "Carol",
+    message:
+      "Our safisfaction survey results just came in too. They aren't...terrible."
+  },
+  {
+    id: 5,
+    name: "Jen",
+    message: "Too early for a Celebration?"
+  }
+];
+
 class App extends Component {
+
+  state = {
+    data: fakeData,
+    isReal: false
+  };
 
   handleHideKeyPress = e => {
       const key = e.keyCode;
       if (key === 27) {
-        console.log("escape key");
+        if (this.state.isReal) {
+          this.setState({ data: fakeData, isReal: false});
+        } else { 
+          this.setState({ data: realData, isReal: true });
+        }
+        
       }
     };
 
@@ -90,7 +130,7 @@ class App extends Component {
                     className="col s12 black-text text-darken-2 white bubble"
                     id="messages"
                   >
-                    {fakeData.map(data => (
+                    {this.state.data.map(data => (
                       <div style={{ padding: 10 }} key={data.id}>
                         <h6>{data.name}</h6>
                         {data.message}
