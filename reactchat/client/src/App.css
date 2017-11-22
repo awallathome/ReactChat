@@ -3,6 +3,11 @@ html {
   font-family: Quicksand, sans-serif;
 }
 
+.container {
+  width: 90%;
+  padding-left: 10px;
+}
+
 h6 {
   color: #2196f3;
 }
@@ -10,6 +15,10 @@ h6 {
 /* Header */
 #logo {
   font-weight: bold;
+}
+
+.nav-wrapper  {
+  color: #2A3132;
 }
 
 /* Input Section */
@@ -30,15 +39,20 @@ h6 {
   height: 44px;
 }
 
-/* Messages Section */
+/* Convo Section */
 #messageArea {
-  padding-top: 50px;
-  padding-bottom: 150px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
-/* Fake Messages Section */
+
+.row {
+  margin: auto;
+}
+
+/* Decoy Convo */
 #messageArea2 {
-  padding-top: 50px;
-  padding-bottom: 150px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 #messages {
@@ -47,20 +61,6 @@ h6 {
   padding-right: 25px;
 }
 
-/* Footer */
-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
+.page-footer {
 
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
 }
