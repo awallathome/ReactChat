@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-// import ToggleMessage from "./App.test.js";
 
 const fakeData = [
   {
@@ -63,7 +62,8 @@ class App extends Component {
 
   state = {
     data: fakeData,
-    isReal: false
+    isReal: false,
+    message: ""
   };
 
   handleHideKeyPress = e => {
@@ -78,6 +78,21 @@ class App extends Component {
       }
     };
 
+  handleInputChange = e => {
+    const value = e.target.value;
+    const name = e.target.getAttribute("id");
+
+    this.setState({ [name] : value });
+
+  }
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+    const newData = this.state.data.concat({id: this.state.data.length + 1, name: "Adam", message: this.state.message });
+
+    this.setState({ data: newData });
+  }
+
   componentDidMount() {
     document.addEventListener("keydown", this.handleHideKeyPress);
   };
@@ -87,8 +102,7 @@ class App extends Component {
   };
 
   render() {
-    return (
-      <div className="App">
+    return <div className="App">
         <div className="navbar-fixed">
           <nav>
             <div className="nav-wrapper blue-grey">
@@ -106,10 +120,7 @@ class App extends Component {
             <div className="container">
               <div className="container">
                 <div className="row">
-                  <div
-                    className="col s12 grey-text text-darken-2 white bubble"
-                    id="messages"
-                  >
+                  <div className="col s12 grey-text text-darken-2 white bubble" id="messages">
                     {/*<p>{ToggleMessage}</p>*/}
                     <div style={{ padding: 10 }}>
                       <h6>this.username</h6>this.message
@@ -126,10 +137,7 @@ class App extends Component {
             <div className="container">
               <div className="container">
                 <div className="row">
-                  <div
-                    className="col s12 black-text text-darken-2 white bubble"
-                    id="messages"
-                  >
+                  <div className="col s12 black-text text-darken-2 white bubble" id="messages">
                     {this.state.data.map(data => (
                       <div style={{ padding: 10 }} key={data.id}>
                         <h6>{data.name}</h6>
@@ -151,20 +159,12 @@ class App extends Component {
                 <form className="col s12" id="messageForm">
                   <div className="row">
                     <div className="input-field col s11">
-                      <input
-                        type="text"
-                        placeholder="Message"
-                        className="white grey-text text-darken-2 bubble"
-                        id="message"
-                      />
+                      <input type="text" placeholder="Message" className="white grey-text text-darken-2 bubble" id="message" value={this.state.message} onChange={this.handleInputChange} />
                     </div>
                     <div className="col s1 center">
-                      <a href="#marker">
-                        <i
-                          className="material-icons yellow blue-text small hoverable circle"
-                          id="sendMessage"
-                        >
-                          arrow_upward
+                      <a href="#marker" onClick={this.handleFormSubmit}>
+                        <i className="material-icons white blue-text small hoverable circle" id="sendMessage">
+                          arrow_drop_up
                         </i>
                       </a>
                     </div>
@@ -174,8 +174,7 @@ class App extends Component {
             </div>
           </div>
         </footer>
-      </div>
-    );
+      </div>;
   }
 }
 
