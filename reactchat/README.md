@@ -1,6 +1,5 @@
 # ReactChat
 
-Here we take our app (fka "SafeChat") to new heights with React, independent chatrooms, and invitations. 
+Here is SafeChat's 2.0 promised upgrade, to be deployed under the name Confyd. 
 
-11/11/17 
-Left off at copying the whole server file
+It features the ability to quickly create rooms for confidential team conversations, inviting participants, and keeping sensitive information under your control. 
