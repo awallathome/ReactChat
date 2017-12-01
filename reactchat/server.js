@@ -5,14 +5,25 @@ var app = express();
 var http = require("http").Server(app);
 var ioConnect = require("./config/io")(http);
 // var connection = require("./config/connection");
-// var messageJS = require("./models/message.js");
+var Message = require("./config/message.js");
 var bodyParser = require("body-parser");
 // var orm = require("./config/orm");
 // var routes = require("./controllers/controller.js");
+var mongoose = require("mongoose");
 
 // Port
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 console.log("Now running on port " + port + ".");
+
+// Set up promises with mongoose
+mongoose.Promise = global.Promise;
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/confyddb",
+  {
+    useMongoClient: true
+  }
+);
 
 // Set body-parser middleware to handle forms and json data
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,8 +55,13 @@ ioConnect.on("connection", function(socket) {
   });
 });
 
-// On every route, use the routes middleware
-// app.use("/", routes);
+  //routes
+  app.get("/api/messages", function(req, res) {
+    Message.find()
+      .then(function(dbMessages) {
+        res.json(dbMessages);
+      })
+  })
 
 // Listener
 http.listen(port);

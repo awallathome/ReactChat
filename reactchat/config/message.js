@@ -2,18 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
-  _id: { 
-  	type: Schema.Types.ObjectId,
-    required: true },
-  Name: { 
+  name: { 
    type: String,
    required: true },
-  Messages: { 
+  message: { 
   	type: String,
   	required: true },
   date: { 
   	type: Date, 
   	default: Date.now }
+});
 
 
 const Message = mongoose.model("Message", MessageSchema);

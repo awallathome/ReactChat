@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import axios from "axios";
 
 const fakeData = [
   {
@@ -28,41 +29,13 @@ const fakeData = [
   message: "Too early for a Celebration?"
 }];
 
-const realData = [
-  {
-    id: 1,
-    name: "Jill",
-    message: "User result came in. They were decent."
-  },
-  {
-    id: 2,
-    name: "Real",
-    message: "Data"
-  },
-  {
-    id: 3,
-    name: "Real",
-    message:
-      "Stuff"
-  },
-  {
-    id: 4,
-    name: "Carol",
-    message:
-      "Our safisfaction survey results just came in too. They aren't...terrible."
-  },
-  {
-    id: 5,
-    name: "Jen",
-    message: "Too early for a Celebration?"
-  }
-];
 
 class App extends Component {
 
   state = {
     data: fakeData,
     isReal: false,
+    userName: "",
     message: ""
   };
 
@@ -72,7 +45,7 @@ class App extends Component {
         if (this.state.isReal) {
           this.setState({ data: fakeData, isReal: false});
         } else { 
-          this.setState({ data: realData, isReal: true });
+          this.setState({ isReal: true }, this.getMessages);
         }
         
       }
@@ -81,20 +54,39 @@ class App extends Component {
   handleInputChange = e => {
     const value = e.target.value;
     const name = e.target.getAttribute("id");
-
     this.setState({ [name] : value });
 
+  }
+
+  getMessages = () => {
+    axios.get("api/messages").then(response => this.setState({data: response.data}))
+    
   }
 
   handleFormSubmit = e => {
     e.preventDefault();
     const newData = this.state.data.concat({id: this.state.data.length + 1, name: "Adam", message: this.state.message });
+    this.socket.emit("message", {message: this.state.message, name: "Adam" })
+    this.setState({ message: "" });
+    
+  }
 
-    this.setState({ data: newData });
+  hitEnter = e => {
+    e.preventDefault();
+    if (e.keyCode === 13) {
+      this.handleFormSubmit();
+    }
   }
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleHideKeyPress);
+    this.socket = window.io();
+    this.socket.on("message", (message) => {
+      if (this.state.isReal) {
+        const newData = this.state.data.concat(message);
+        this.setState({data: newData});
+      }
+    });
   };
 
   componentWillUnmount() {
@@ -162,11 +154,11 @@ class App extends Component {
                       <input type="text" placeholder="Message" className="white grey-text text-darken-2 bubble" id="message" value={this.state.message} onChange={this.handleInputChange} />
                     </div>
                     <div className="col s1 center">
-                      <a href="#marker" onClick={this.handleFormSubmit}>
+                      <button style={{ background: "transparent", border: "none" }} href="#marker" onClick={this.handleFormSubmit}>
                         <i className="material-icons white blue-text small hoverable circle" id="sendMessage">
                           arrow_drop_up
                         </i>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </form>
