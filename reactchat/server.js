@@ -10,6 +10,7 @@ var bodyParser = require("body-parser");
 // var orm = require("./config/orm");
 // var routes = require("./controllers/controller.js");
 var mongoose = require("mongoose");
+var Room = require("./config/room");
 
 // Port
 var port = process.env.PORT || 3001;
@@ -37,7 +38,7 @@ ioConnect.on("connection", function(socket) {
   // Log connection
   console.log("User connected.");
   // Get all messages from database upon connecting
-  socket.on("messages", function(messages) {
+  socket.on("messages", function(messages) { 
     ioConnect.emit("messages", messages);
   });
 
@@ -56,6 +57,12 @@ ioConnect.on("connection", function(socket) {
 });
 
   //routes
+  app.get("/api/room", function (req, res) {
+    Room.create({})
+      .then(function(dbRoom) {
+        res.json(dbRoom);
+      })
+  });
   app.get("/api/messages", function(req, res) {
     Message.find()
       .then(function(dbMessages) {

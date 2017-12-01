@@ -7,12 +7,16 @@ module.exports = function(http) {
   var ioConnect = io(http);
   ioConnect.on("connection", function(socket) {
     socket.on("message", function(message) {
+      socket.emit("room-" + data.room + "-message", {
+        message: "It worked",
+        room: data.room
+      });
       messageModel.create(message)
       .then(function(dbMessage){
         console.log(dbMessage);
       });
     });
   });
-  
+
   return ioConnect;
 };
