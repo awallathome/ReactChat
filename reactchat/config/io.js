@@ -7,9 +7,9 @@ module.exports = function(http) {
   var ioConnect = io(http);
   ioConnect.on("connection", function(socket) {
     socket.on("message", function(message) {
-      socket.emit("room-" + data.room + "-message", {
+      socket.emit("room-" + message.room + "-message", {
         message: "It worked",
-        room: data.room
+        room: message.room
       });
       messageModel.create(message)
       .then(function(dbMessage){

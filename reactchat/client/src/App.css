@@ -21,6 +21,30 @@ h6 {
   color: #2A3132;
 }
 
+#invite {
+  background-color: transparent;
+  border: none;
+  color: white;
+
+}
+
+#save {
+  background-color: transparent;
+  border: none;
+  color: white;
+
+}
+
+button {
+  float: right;
+
+}
+
+button:hover {
+  background-color: orange;
+
+}
+
 /* Input Section */
 #message {
   padding-left: 20px;
@@ -61,6 +85,4 @@ h6 {
   padding-right: 25px;
 }
 
-.page-footer {
 
-}

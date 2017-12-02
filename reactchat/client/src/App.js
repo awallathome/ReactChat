@@ -64,10 +64,9 @@ class App extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const newData = this.state.data.concat({id: this.state.data.length + 1, name: "Adam", message: this.state.message });
-    this.socket.emit("message", {message: this.state.message, name: "Adam" })
+    this.socket.emit("message", {message: this.state.message, room: "bazinga", name: "Adam" })
     this.setState({ message: "" });
-
+    
   }
 
   hitEnter = e => {
@@ -97,11 +96,17 @@ class App extends Component {
     return <div className="App">
         <div className="navbar-fixed">
           <nav>
+           
             <div className="nav-wrapper blue-grey">
               <div className="row">
                 <a href="#messageArea" className="brand-logo center" id="logo">
                   <i className="material-icons">forum</i>Confyd
-                </a>
+                </a> 
+                <button id="save">Save on Exit?
+                </button>
+                <button id="invite">Invite
+                </button>
+
               </div>
             </div>
           </nav>
