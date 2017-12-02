@@ -29,6 +29,8 @@ const fakeData = [
   message: "Too early for a Celebration?"
 }];
 
+
+
 class App extends Component {
 
   state = {
@@ -74,6 +76,7 @@ class App extends Component {
     if (e.keyCode === 13) {
       this.handleFormSubmit();
     }
+
   }
 
   componentDidMount() {
@@ -106,7 +109,6 @@ class App extends Component {
                 </button>
                 <button id="invite">Invite
                 </button>
-
               </div>
             </div>
           </nav>
