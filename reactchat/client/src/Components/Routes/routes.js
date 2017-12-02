@@ -5,9 +5,9 @@ import App from "../../App";
 const Routes = () => (
   <Router>
     <div>
-     
       <Switch>
         <Route exact path="/" component={App} />
+        <Route exact path="/:id" component={App} />
       </Switch>
     </div>
   </Router>

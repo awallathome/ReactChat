@@ -64,7 +64,7 @@ ioConnect.on("connection", function(socket) {
       })
   });
   app.get("/api/messages", function(req, res) {
-    Message.find()
+    Message.find(req.query)
       .then(function(dbMessages) {
         res.json(dbMessages);
       })

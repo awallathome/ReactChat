@@ -4,27 +4,27 @@ import axios from "axios";
 
 const fakeData = [
   {
-  id: 1,
+  _id: 1,
   name: "Jill",
   message: "User result came in. They were decent."
 },
 {
-  id: 2,
+  _id: 2,
   name: "Charles",
   message: "Ha! nice!"
 },
 {
-  id: 3,
+  _id: 3,
   name: "Rob",
   message: "Great to hear. We beat the competitors, but we also blew the budget. Oops."
 },
 {
-  id: 4,
+  _id: 4,
   name: "Carol",
   message: "Our safisfaction survey results just came in too. They aren't...terrible."
 },
 {
-  id: 5,
+  _id: 5,
   name: "Jen",
   message: "Too early for a Celebration?"
 }];
@@ -60,13 +60,16 @@ class App extends Component {
   }
 
   getMessages = () => {
-    axios.get("api/messages").then(response => this.setState({data: response.data}))
+    axios.get("api/messages?room=" + this.props.match.params.id).then(response => this.setState({data: response.data}))
     
   }
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.socket.emit("message", {message: this.state.message, room: "bazinga", name: "Adam" })
+    this.socket.emit("message", {
+      message: this.state.message, 
+      room: this.props.match.params.id, 
+      name: "Adam" })
     this.setState({ message: "" });
     
   }
@@ -80,19 +83,27 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const roomId = (this.props.match.params.id);
+    if (!roomId) {
+      axios.get("api/room").then(res => window.location.pathname = res.data._id);
+    } else {
+
     document.addEventListener("keydown", this.handleHideKeyPress);
     this.socket = window.io();
-    this.socket.on("message", (message) => {
+    this.socket.on("message-" + roomId, (message) => {
+      console.log("anything2");
       if (this.state.isReal) {
+        console.log("anything3");
         const newData = this.state.data.concat(message);
         this.setState({data: newData});
       }
-    });
-    axios.get("api/room").then(res => console.log(res)); 
+    }); 
   };
+}
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleHideKeyPress);
+
   };
 
   render() {
@@ -138,7 +149,7 @@ class App extends Component {
                 <div className="row">
                   <div className="col s12 black-text text-darken-2 white bubble" id="messages">
                     {this.state.data.map(data => (
-                      <div style={{ padding: 10 }} key={data.id}>
+                      <div key={data._id} style={{ padding: 10 }} >
                         <h6>{data.name}</h6>
                         {data.message}
                       </div>
