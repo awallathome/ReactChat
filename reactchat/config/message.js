@@ -10,7 +10,11 @@ const MessageSchema = new Schema({
   	required: true },
   date: { 
   	type: Date, 
-  	default: Date.now }
+  	default: Date.now },
+  room: {
+    type: Schema.Types.ObjectId, 
+    ref: "Room"
+  }
 });
 
 

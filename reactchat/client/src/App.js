@@ -29,7 +29,6 @@ const fakeData = [
   message: "Too early for a Celebration?"
 }];
 
-
 class App extends Component {
 
   state = {
@@ -68,7 +67,7 @@ class App extends Component {
     const newData = this.state.data.concat({id: this.state.data.length + 1, name: "Adam", message: this.state.message });
     this.socket.emit("message", {message: this.state.message, name: "Adam" })
     this.setState({ message: "" });
-    
+
   }
 
   hitEnter = e => {
@@ -87,6 +86,7 @@ class App extends Component {
         this.setState({data: newData});
       }
     });
+    axios.get("api/room").then(res => console.log(res)); 
   };
 
   componentWillUnmount() {
