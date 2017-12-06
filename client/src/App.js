@@ -61,12 +61,13 @@ class App extends Component {
   getMessages = () => {
     axios
       .get("api/messages?room=" + this.props.match.params.id)
-      .then(response => this.setState({ data: response.data }, () => {
-        const messageDiv = document.querySelector("#messages");
-        console.log(messageDiv);
-        messageDiv.scrollTop = messageDiv.scrollHeight;
-      }));
-
+      .then(response =>
+        this.setState({ data: response.data }, () => {
+          const messageDiv = document.querySelector("#messages");
+          console.log(messageDiv);
+          messageDiv.scrollTop = messageDiv.scrollHeight;
+        })
+      );
   };
 
   handleFormSubmit = e => {
@@ -88,31 +89,33 @@ class App extends Component {
 
   componentDidMount() {
     //Here we are asking for any name whatsoever
-      
-      const roomId = this.props.match.params.id;
-      if (!roomId) {
-        axios
-          .get("api/room")
-          .then(res => (window.location.pathname = res.data._id));
-      } else {
-        this.init(() => {
-          let user = prompt("Please enter a name for your session. Any name will do.");
-          this.setState({userName: user});
-          document.addEventListener("keydown", this.handleHideKeyPress);
-          this.socket = window.io();
-          this.socket.emit("room", roomId);
-          this.socket.on("message", message => {
-            console.log(message);
-            if (this.state.isReal) {
-              const messageDiv = document.querySelector("#messages");
-              console.log(messageDiv);
-              messageDiv.scrollTop = messageDiv.scrollHeight;
-              const newData = this.state.data.concat(message);
-              this.setState({ data: newData });
-            }
-          });
-        }, () => (window.location.pathname = ""));
-      }
+    this.socket = window.io();
+    const roomId = this.props.match.params.id;
+    if (!roomId) {
+      axios
+        .get("api/room")
+        .then(res => (window.location.pathname = res.data._id));
+    } else {
+      this.init(() => {
+        let user = prompt(
+          "Please enter a name for your session. Any name will do."
+        );
+        this.setState({ userName: user });
+        document.addEventListener("keydown", this.handleHideKeyPress);
+
+        this.socket.emit("room", roomId);
+        this.socket.on("message", message => {
+          console.log(message);
+          if (this.state.isReal) {
+            const messageDiv = document.querySelector("#messages");
+            console.log(messageDiv);
+            messageDiv.scrollTop = messageDiv.scrollHeight;
+            const newData = this.state.data.concat(message);
+            this.setState({ data: newData });
+          }
+        });
+      }, () => (window.location.pathname = ""));
+    }
   }
 
   componentWillUnmount() {
@@ -156,7 +159,6 @@ class App extends Component {
                     <div style={{ padding: 10 }}>
                       <h6>this.username</h6>this.message
                     </div>
-                    
                   </div>
                 </div>
                 <div className="scrollspy" id="marker" />
