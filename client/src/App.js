@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
+const invite = require("./Components/Invite/invite");
 
 const fakeData = [
   {
@@ -120,6 +121,7 @@ class App extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleHideKeyPress);
+    
   }
 
   init = (success, error) => {
@@ -140,7 +142,7 @@ class App extends Component {
                   <i className="material-icons">security</i>Confyd
                 </a>
                 <button id="save">Save on Exit?</button>
-                <button id="invite">Invite</button>
+                <button onClick={invite} id="invite">Invite</button>
               </div>
             </div>
           </nav>
