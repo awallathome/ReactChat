@@ -13,17 +13,9 @@ module.exports = function(http) {
       socket.join(room);
     });
 
-    socket.on("message", function(message) {
-      if (socket.room) socket.leave(socket.room);
-      socket.join(message.room);
-      socket.room = message.room;
+    socket.on("message-server", function(message) {
       messageModel.create(message).then(function(dbMessage) {
-        socket.broadcast.to(message.room).emit("message", {
-          name: dbMessage.name,
-          message: dbMessage.message,
-          room: dbMessage.room.toString(),
-          _id: dbMessage._id
-        });
+        ioConnect.in(message.room).emit("message", dbMessage);
       });
     });
   });

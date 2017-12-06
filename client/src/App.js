@@ -43,6 +43,7 @@ class App extends Component {
   handleHideKeyPress = e => {
     const key = e.keyCode;
     if (key === 27) {
+      e.preventDefault();
       if (this.state.isReal) {
         this.setState({ data: fakeData, isReal: false });
       } else {
@@ -60,15 +61,21 @@ class App extends Component {
   getMessages = () => {
     axios
       .get("api/messages?room=" + this.props.match.params.id)
-      .then(response => this.setState({ data: response.data }));
+      .then(response =>
+        this.setState({ data: response.data }, () => {
+          const messageDiv = document.querySelector("#messages");
+          console.log(messageDiv);
+          messageDiv.scrollTop = messageDiv.scrollHeight;
+        })
+      );
   };
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.socket.emit("message", {
+    this.socket.emit("message-server", {
       message: this.state.message,
       room: this.props.match.params.id,
-      name: "Adam"
+      name: this.state.userName
     });
     this.setState({ message: "" });
   };
@@ -81,6 +88,8 @@ class App extends Component {
   };
 
   componentDidMount() {
+    //Here we are asking for any name whatsoever
+    this.socket = window.io();
     const roomId = this.props.match.params.id;
     if (!roomId) {
       axios
@@ -88,11 +97,19 @@ class App extends Component {
         .then(res => (window.location.pathname = res.data._id));
     } else {
       this.init(() => {
+        let user = prompt(
+          "Please enter a name for your session. Any name will do."
+        );
+        this.setState({ userName: user });
         document.addEventListener("keydown", this.handleHideKeyPress);
-        this.socket = window.io();
+
         this.socket.emit("room", roomId);
         this.socket.on("message", message => {
+          console.log(message);
           if (this.state.isReal) {
+            const messageDiv = document.querySelector("#messages");
+            console.log(messageDiv);
+            messageDiv.scrollTop = messageDiv.scrollHeight;
             const newData = this.state.data.concat(message);
             this.setState({ data: newData });
           }
@@ -120,7 +137,7 @@ class App extends Component {
             <div className="nav-wrapper blue-grey">
               <div className="row">
                 <a href="#messageArea" className="brand-logo center" id="logo">
-                  <i className="material-icons">forum</i>Confyd
+                  <i className="material-icons">security</i>Confyd
                 </a>
                 <button id="save">Save on Exit?</button>
                 <button id="invite">Invite</button>
@@ -136,13 +153,12 @@ class App extends Component {
                 <div className="row">
                   <div
                     className="col s12 grey-text text-darken-2 white bubble"
-                    id="messages"
+                    id="decoyMessages"
                   >
                     {/*<p>{ToggleMessage}</p>*/}
                     <div style={{ padding: 10 }}>
                       <h6>this.username</h6>this.message
                     </div>
-                    <p>each</p>
                   </div>
                 </div>
                 <div className="scrollspy" id="marker" />
