@@ -7,23 +7,21 @@ module.exports = function(http) {
   var ioConnect = io(http);
   ioConnect.on("connection", function(socket) {
     socket.on("room", function(room) {
+      console.log("room " + room);
       if (socket.room) socket.leave(socket.room);
 
       socket.room = room;
       socket.join(room);
     });
 
-    socket.on("message", function(message) {
+    socket.on("message-server", function(message) {
       if (socket.room) socket.leave(socket.room);
       socket.join(message.room);
       socket.room = message.room;
+      console.log("second room " + room);
       messageModel.create(message).then(function(dbMessage) {
-        socket.broadcast.to(message.room).emit("message", {
-          name: dbMessage.name,
-          message: dbMessage.message,
-          room: dbMessage.room.toString(),
-          _id: dbMessage._id
-        });
+        console.log(dbMessage);
+        socket.broadcast.to(message.room).emit("message", dbMessage);
       });
     });
   });

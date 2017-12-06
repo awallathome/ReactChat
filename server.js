@@ -4,11 +4,8 @@ var path = require("path");
 var app = express();
 var http = require("http").Server(app);
 var ioConnect = require("./config/io")(http);
-// var connection = require("./config/connection");
 var Message = require("./config/message.js");
 var bodyParser = require("body-parser");
-// var orm = require("./config/orm");
-// var routes = require("./controllers/controller.js");
 var mongoose = require("mongoose");
 var Room = require("./config/room");
 
@@ -18,6 +15,7 @@ console.log("Now running on port " + port + ".");
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
+
 // Connect to the Mongo DB
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/confyddb",
@@ -35,8 +33,10 @@ app.use(express.static("public"));
 
 // Socket.io functions
 ioConnect.on("connection", function(socket) {
+
   // Log connection
   console.log("User connected.");
+
   // Get all messages from database upon connecting
   socket.on("messages", function(messages) { 
     ioConnect.emit("messages", messages);
@@ -45,9 +45,7 @@ ioConnect.on("connection", function(socket) {
   // If user sends a message
   socket.on("message", function(message) {
     ioConnect.emit("message", message);
-    // messageJS.create(message, function(response) {
-    //   console.log("User sent a message.");
-    // });
+
   });
 
   // If user disconnects
