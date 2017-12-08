@@ -29,7 +29,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Set public directory as default location for static content
-app.use(express.static("public"));
+if (process.env.NODE_ENV) {
+  app.use(express.static("client/build"));
+}
+
 
 // Socket.io functions
 ioConnect.on("connection", function(socket) {
