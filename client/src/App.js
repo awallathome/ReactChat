@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import { Modal } from "react-materialize";
+import { Button, Modal } from "react-materialize";
 import SendMessageBtn from "./Components/sendMessageBtn";
 
 const fakeData = [
@@ -178,7 +178,7 @@ class App extends Component {
   
                 </p>
                 </Modal>
-                <Modal header="Copy and share this link to invite." trigger={<button id="invite">
+                <Modal header="Copy/share this link to invite." trigger={<button id="invite">
                       Invite
                     </button>}>
                   <p>

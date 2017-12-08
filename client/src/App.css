@@ -65,7 +65,7 @@ h6 {
   transition: .5s;
 }
 
-#save {
+#delete {
   background-color: transparent;
   border: none;
   color: white;
@@ -73,7 +73,7 @@ h6 {
 
 }
 
-#save:hover {
+#delete:hover {
   color: orange;
   transition: .5s;
 }
@@ -111,7 +111,7 @@ button {
 #sendMessage:hover {
   className: orange;
   transition: .5s;
-  
+
 }
 
 /* Convo Section */
