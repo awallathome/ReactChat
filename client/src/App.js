@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import { Button, Icon, Modal } from "react-materialize";
+import { Modal } from "react-materialize";
+import SendMessageBtn from "./Components/sendMessageBtn";
 
 const fakeData = [
   {
@@ -117,7 +118,7 @@ class App extends Component {
     } else {
       this.init(() => {
         let user = prompt(
-          "Toggle between decoy and your chat with the <esc> key. \n \n Please enter a name for your session. Any name will do."
+          "Toggle the view with the <esc> key \n OR by clicking on the Logo. \n \n Enter a name for your session. Any name will do."
         );
         this.setState({ userName: user });
         document.addEventListener("keydown", this.handleHideKeyPress);
@@ -162,7 +163,7 @@ class App extends Component {
     return <div className="App">
         <div className="navbar-fixed">
           <nav>
-            <div className="nav-wrapper blue-grey">
+            <div className="nav-wrapper #263238 blue-grey darken-4">
               <div className="row">
                 <a href="#messageArea" className="brand-logo center" id="logo" onClick={this.handleLogoClick}>
                   <i className="material-icons">security</i>On the Fly
@@ -186,7 +187,7 @@ class App extends Component {
                   <p>
                     {window.location.origin}/{this.props.match.params.id}
                   </p>
-                  <input id="roomLink" type="text" style={{ display: "none" }} value={`${window.location.origin}/${this.props.match.params.id}`} />
+                  <input id="roomLink" type="text" style={{ display: "none" }} defaultValue={`${window.location.origin}/${this.props.match.params.id}`} />
                   {/*<button onClick={this.roomLink}>Copy Link</button>*/}
                 </Modal>
               </div>
@@ -230,7 +231,7 @@ class App extends Component {
           </div>
         </main>
 
-        <footer className="page-footer blue-grey">
+        <footer className="page-footer #263238 blue-grey darken-4">
           <div className="row " id="chat">
             <div className="container">
               <div className="container">
@@ -240,11 +241,7 @@ class App extends Component {
                       <input type="text" placeholder="Message" className="white grey-text text-darken-2 bubble" id="message" value={this.state.message} onChange={this.handleInputChange} />
                     </div>
                     <div className="col s1 center">
-                      <button style={{ background: "transparent", border: "none" }} href="#marker" onClick={this.handleFormSubmit}>
-                        <i className="material-icons white blue-text small hoverable circle" id="sendMessage">
-                          arrow_drop_up
-                        </i>
-                      </button>
+                      <SendMessageBtn handleFormSubmit={this.handleFormSubmit}/>
                     </div>
                   </div>
                 </form>

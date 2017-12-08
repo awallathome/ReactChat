@@ -10,7 +10,7 @@ html {
 }
 
 h6 {
-  color: #2A3132;
+  color: #78909c;
 
 }
 
@@ -109,8 +109,9 @@ button {
 }
 
 #sendMessage:hover {
-  background-color: orange;
+  className: orange;
   transition: .5s;
+  
 }
 
 /* Convo Section */
