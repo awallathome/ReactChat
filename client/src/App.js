@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import { Button, Icon, Modal } from "react-materialize";
-const invite = require("./Components/Invite/invite");
 
 const fakeData = [
   {
@@ -59,6 +58,14 @@ class App extends Component {
     }
   };
 
+  handleLogoClick = e => {
+    if (this.state.isReal) {
+      this.setState({ data: fakeData, isReal: false });
+    } else {
+      this.setState({ isReal: true }, this.getMessages);
+    }
+  };
+
   handleInputChange = e => {
     const value = e.target.value;
     const name = e.target.getAttribute("id");
@@ -105,7 +112,7 @@ class App extends Component {
     } else {
       this.init(() => {
         let user = prompt(
-          "Please enter a name for your session. Any name will do."
+          "Toggle between decoy and your chat with the <esc> key. \n \n Please enter a name for your session. Any name will do."
         );
         this.setState({ userName: user });
         document.addEventListener("keydown", this.handleHideKeyPress);
@@ -152,14 +159,16 @@ class App extends Component {
           <nav>
             <div className="nav-wrapper blue-grey">
               <div className="row">
-                <a href="#messageArea" className="brand-logo center" id="logo">
-                  <i className="material-icons">security</i>Confyd
+                <a href="#messageArea" className="brand-logo center" id="logo" onClick={this.handleLogoClick}>
+                  <i className="material-icons">security</i>On the Fly
                 </a>
-                <button id="save">Save on Exit?</button>
-                <Modal header="Modal Header" trigger={<button id="invite">
+                <button id="save">Erase this Chat</button>
+                <Modal header="Copy and share this link to invite." trigger={<button id="invite">
                       Invite
                     </button>}>
-                  <p>Invite others to this room with the link below. Save this link in order to return to this conversation.</p>
+                  <p>
+                    Save this link in order to return to this conversation.
+                  </p>
                   <p>
                     {window.location.origin}/{this.props.match.params.id}
                   </p>
