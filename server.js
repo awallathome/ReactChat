@@ -79,5 +79,16 @@ ioConnect.on("connection", function(socket) {
       })
   })
 
+  app.delete("/api/messages", function(req, res) {
+    if !(req.query.room) return res.json({});
+    Message.remove(req.query)
+      .then(function(dbMessages){
+        res.json(dbMessages);
+      })
+
+  
+
+  })
+
 // Listener
 http.listen(port);

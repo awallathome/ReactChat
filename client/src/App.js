@@ -59,6 +59,14 @@ class App extends Component {
     }
   };
 
+
+  deleteChat = () =>{
+    axios.delete("api/messages", { params: { room: this.props.match.params.id }})
+      .then(this.getMessages);
+  };
+
+
+
   handleInputChange = e => {
     const value = e.target.value;
     const name = e.target.getAttribute("id");
@@ -137,6 +145,7 @@ class App extends Component {
       .catch(error);
   };
 
+ 
   // roomLink = () => {
   //   var copyText = document.getElementById("roomLink");
   //   console.log(copyText);
@@ -155,7 +164,20 @@ class App extends Component {
                 <a href="#messageArea" className="brand-logo center" id="logo">
                   <i className="material-icons">security</i>Confyd
                 </a>
-                <button id="save">Save on Exit?</button>
+                <Modal header="Erase all Messages" trigger={<button id="delete">
+              Delete Chat</button>}>
+              <p>Click yes to permantly delete this chats messages.<br>
+              </br> 
+            
+             {<Button onClick={this.deleteChat}>confirm</Button>}
+            
+
+              </p>
+              
+            <input id="roomLink" type="text" style={{ display: "none" }} value={`${window.location.origin}/${this.props.match.params.id}`} />
+            {/*<button onClick={this.deleteroom}>Copy Link</button>*/}
+              </Modal>
+                
                 <Modal header="Modal Header" trigger={<button id="invite">
                       Invite
                     </button>}>
