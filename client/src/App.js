@@ -72,6 +72,11 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
+  deleteChat = () =>{
+    axios.delete("api/messages", { params: { room: this.props.match.params.id }})
+      .then(this.getMessages);
+  };
+
   getMessages = () => {
     axios
       .get("api/messages?room=" + this.props.match.params.id)
@@ -162,7 +167,16 @@ class App extends Component {
                 <a href="#messageArea" className="brand-logo center" id="logo" onClick={this.handleLogoClick}>
                   <i className="material-icons">security</i>On the Fly
                 </a>
-                <button id="save">Erase this Chat</button>
+                <Modal header="Erase all Messages" trigger={<button id="delete">
+                Delete Chat</button>}>
+                <p>Click yes to permantly delete this chats messages.<br>
+                </br> 
+              
+               {<Button onClick={this.deleteChat}>confirm</Button>}
+              
+  
+                </p>
+                </Modal>
                 <Modal header="Copy and share this link to invite." trigger={<button id="invite">
                       Invite
                     </button>}>
