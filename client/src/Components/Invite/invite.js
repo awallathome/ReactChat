@@ -1,7 +1,13 @@
-const url = window.location.href;
 
-function invite() {
-  alert("Use this link to invite people to a group chat. \n \n" + url);
-}
+import { Button, Icon, Modal } from "react-materialize";
+import React from "react";
 
-module.exports = invite;
+export default () =>
+  function roomLink() {
+    var copyText = document.getElementById("#roomLink");
+    copyText.select();
+    document.execCommand("Copy");
+    alert("Copied the text: " + copyText.value);
+  
+};
+

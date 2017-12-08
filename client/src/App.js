@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
+import { Button, Icon, Modal } from "react-materialize";
 const invite = require("./Components/Invite/invite");
 
 const fakeData = [
@@ -29,7 +30,12 @@ const fakeData = [
   {
     _id: 5,
     name: "Jen",
-    message: "Too early for a Celebration?"
+    message: "Let's try Rob's suggestion..."
+  },
+  {
+    _id: 6,
+    name: "Carol",
+    message: "I like that. Are there other ideas to consider?"
   }
 ];
 
@@ -131,9 +137,17 @@ class App extends Component {
       .catch(error);
   };
 
+  // roomLink = () => {
+  //   var copyText = document.getElementById("roomLink");
+  //   console.log(copyText);
+  //   console.log(copyText.value);
+  //   copyText.select();
+  //   document.execCommand("Copy");
+  //   alert("Copied the text: " + copyText.value);
+  // };
+
   render() {
-    return (
-      <div className="App">
+    return <div className="App">
         <div className="navbar-fixed">
           <nav>
             <div className="nav-wrapper blue-grey">
@@ -142,7 +156,16 @@ class App extends Component {
                   <i className="material-icons">security</i>Confyd
                 </a>
                 <button id="save">Save on Exit?</button>
-                <button onClick={invite} id="invite">Invite</button>
+                <Modal header="Modal Header" trigger={<button id="invite">
+                      Invite
+                    </button>}>
+                  <p>Invite others to this room with the link below. Save this link in order to return to this conversation.</p>
+                  <p>
+                    {window.location.origin}/{this.props.match.params.id}
+                  </p>
+                  <input id="roomLink" type="text" style={{ display: "none" }} value={`${window.location.origin}/${this.props.match.params.id}`} />
+                  {/*<button onClick={this.roomLink}>Copy Link</button>*/}
+                </Modal>
               </div>
             </div>
           </nav>
@@ -153,10 +176,7 @@ class App extends Component {
             <div className="container">
               <div className="container">
                 <div className="row">
-                  <div
-                    className="col s12 grey-text text-darken-2 white bubble"
-                    id="decoyMessages"
-                  >
+                  <div className="col s12 grey-text text-darken-2 white bubble" id="decoyMessages">
                     {/*<p>{ToggleMessage}</p>*/}
                     <div style={{ padding: 10 }}>
                       <h6>this.username</h6>this.message
@@ -172,10 +192,7 @@ class App extends Component {
             <div className="container">
               <div className="container">
                 <div className="row">
-                  <div
-                    className="col s12 black-text text-darken-2 white bubble"
-                    id="messages"
-                  >
+                  <div className="col s12 black-text text-darken-2 white bubble" id="messages">
                     {this.state.data.map(data => (
                       <div key={data._id} style={{ padding: 10 }}>
                         <h6>{data.name}</h6>
@@ -197,25 +214,11 @@ class App extends Component {
                 <form className="col s12" id="messageForm">
                   <div className="row">
                     <div className="input-field col s11">
-                      <input
-                        type="text"
-                        placeholder="Message"
-                        className="white grey-text text-darken-2 bubble"
-                        id="message"
-                        value={this.state.message}
-                        onChange={this.handleInputChange}
-                      />
+                      <input type="text" placeholder="Message" className="white grey-text text-darken-2 bubble" id="message" value={this.state.message} onChange={this.handleInputChange} />
                     </div>
                     <div className="col s1 center">
-                      <button
-                        style={{ background: "transparent", border: "none" }}
-                        href="#marker"
-                        onClick={this.handleFormSubmit}
-                      >
-                        <i
-                          className="material-icons white blue-text small hoverable circle"
-                          id="sendMessage"
-                        >
+                      <button style={{ background: "transparent", border: "none" }} href="#marker" onClick={this.handleFormSubmit}>
+                        <i className="material-icons white blue-text small hoverable circle" id="sendMessage">
                           arrow_drop_up
                         </i>
                       </button>
@@ -226,8 +229,7 @@ class App extends Component {
             </div>
           </div>
         </footer>
-      </div>
-    );
+      </div>;
   }
 }
 
