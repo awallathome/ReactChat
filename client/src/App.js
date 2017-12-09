@@ -118,7 +118,7 @@ class App extends Component {
     } else {
       this.init(() => {
         let user = prompt(
-          "Toggle the view with the <esc> key OR by clicking on the Logo. \n \n You will need a name for your session. Any name will do."
+          "ON THE FLY! \nYou will need a name for your session. Any name will do. \n \nToggle between real and decoy conversations with the <esc> key \nor by tapping on the Logo.\n"
         );
         this.setState({ userName: user });
         document.addEventListener("keydown", this.handleHideKeyPress);
