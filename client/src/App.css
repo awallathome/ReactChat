@@ -319,15 +319,17 @@ button {
   }
 
   #invite {
-    font-size: 14px;
+    font-size: 12px;
     margin-right: 12px;
     padding: 0;
+    display: inline-block;
   }
 
   #delete {
-    font-size: 14px;
+    font-size: 12px;
     margin-right: 15px;
     padding: 0;
+    display: inline-block;
   }
 
   #messageArea {
