@@ -7,7 +7,7 @@ import SendMessageBtn from "./Components/sendMessageBtn";
 const fakeData = [
   {
     _id: 1,
-    name: "Jill",
+    name: "Sven",
     message: "User result came in. They were decent."
   },
   {
@@ -23,13 +23,13 @@ const fakeData = [
   },
   {
     _id: 4,
-    name: "Carol",
+    name: "Carlita",
     message:
       "Our safisfaction survey results just came in too. They aren't...terrible."
   },
   {
     _id: 5,
-    name: "Jen",
+    name: "Juan",
     message: "Let's try Rob's suggestion..."
   },
   {
@@ -118,7 +118,7 @@ class App extends Component {
     } else {
       this.init(() => {
         let user = prompt(
-          "Toggle the view with the <esc> key \n OR by clicking on the Logo. \n \n Enter a name for your session. Any name will do."
+          "Toggle the view with the <esc> key OR by clicking on the Logo. \n \n You will need a name for your session. Any name will do."
         );
         this.setState({ userName: user });
         document.addEventListener("keydown", this.handleHideKeyPress);
@@ -150,15 +150,6 @@ class App extends Component {
       .catch(error);
   };
 
-  // roomLink = () => {
-  //   var copyText = document.getElementById("roomLink");
-  //   console.log(copyText);
-  //   console.log(copyText.value);
-  //   copyText.select();
-  //   document.execCommand("Copy");
-  //   alert("Copied the text: " + copyText.value);
-  // };
-
   render() {
     return <div className="App">
         <div className="navbar-fixed">
@@ -170,7 +161,7 @@ class App extends Component {
                 </a>
                 <Modal header="Erase all Messages" trigger={<button id="delete">
                 Delete Chat</button>}>
-                <p>Click yes to permantly delete this chats messages.<br>
+                <p>Click 'Confirm' to permantly delete this chats messages.<br>
                 </br> 
               
                {<Button onClick={this.deleteChat}>confirm</Button>}

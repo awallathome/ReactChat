@@ -15,9 +15,7 @@ h6 {
 }
 
 /* Header */
-#logo {
-  font-weight: bold;
-}
+
 
 .nav-wrapper  {
   color: #2A3132;
@@ -80,7 +78,6 @@ h6 {
 
 button {
   float: right;
-  
 }
 
 /* Input Field */
@@ -154,3 +151,120 @@ button {
 
 }
 
+@media only screen and (max-width : 730px) {
+
+  #logo {
+    position: static;
+    font-size: 22px;
+    margin-left: 220px;
+  }
+
+  #invite {
+    font-size: 14px;
+    margin-right: 15px;
+  }
+
+  #delete {
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+  #messageArea {
+    width: 95%;
+    padding-right: 20px;
+    padding-left: 0;
+  }
+
+  #messageArea2 {
+    width: 95%;
+    padding-right: 20px;
+    padding-left: 0;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width : 530px) {
+
+  #logo {
+    position: static;
+    font-size: 18px;
+    margin-left: 150px;
+  }
+
+  #invite {
+    font-size: 14px;
+    margin-right: 15px;
+  }
+
+  #delete {
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+  #messageArea {
+    width: 95%;
+    padding-right: 20px;
+    padding-left: 0;
+  }
+
+  #messageArea2 {
+    width: 95%;
+    padding-right: 20px;
+    padding-left: 0;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  #message {
+    margin-right: 10px;
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width : 530px) {
+
+  #logo {
+    position: static;
+    font-size: 18px;
+    margin-left: 100px;
+  }
+
+  #invite {
+    font-size: 14px;
+    margin-right: 15px;
+  }
+
+  #delete {
+    font-size: 14px;
+    margin-right: 20px;
+  }
+
+  #messageArea {
+    width: 95%;
+    padding-right: 20px;
+    padding-left: 0;
+  }
+
+  #messageArea2 {
+    width: 95%;
+    padding-right: 20px;
+    padding-left: 0;
+  }
+
+  .container {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  #message {
+    margin-right: 10px;
+    width: 85%;
+  }
+}
