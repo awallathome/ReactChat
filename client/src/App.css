@@ -321,11 +321,13 @@ button {
   #invite {
     font-size: 14px;
     margin-right: 12px;
+    padding: 0;
   }
 
   #delete {
     font-size: 14px;
     margin-right: 15px;
+    padding: 0;
   }
 
   #messageArea {
