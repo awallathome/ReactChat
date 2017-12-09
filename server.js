@@ -7,7 +7,7 @@ var ioConnect = require("./config/io")(http);
 var Message = require("./config/message.js");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var Room = require("./config/room");
+var Room = require("./config/room")
 
 // Port
 var port = process.env.PORT || 3001;
