@@ -161,7 +161,7 @@ class App extends Component {
                 </a>
                 <Modal header="Erase all Messages" trigger={<button id="delete">
                 Delete Chat</button>}>
-                <p>Click 'Confirm' to permantly delete this chats messages.<br>
+                <p>Click 'Confirm' to permantly delete this conversation.<br>
                 </br> 
               
                {<Button onClick={this.deleteChat}>confirm</Button>}
@@ -175,9 +175,11 @@ class App extends Component {
                   <p>
                     Save this link in order to return to this conversation.
                   </p>
-                  <p>
-                    {window.location.origin}/{this.props.match.params.id}
-                  </p>
+                  <div id="locationLink">
+                    <p>
+                      {window.location.origin}/{this.props.match.params.id}
+                    </p>
+                  </div>
                   <input id="roomLink" type="text" style={{ display: "none" }} defaultValue={`${window.location.origin}/${this.props.match.params.id}`} />
                   {/*<button onClick={this.roomLink}>Copy Link</button>*/}
                 </Modal>
