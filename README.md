@@ -55,16 +55,17 @@ The ReactChat app (deployed as On the Fly) was created by Adam Wallis (project l
     
     - App.css contains code and styling for anything that renders. It includes media queries for a Responsive Design format that keeps the code readable, usable, and uncongested on a mobile devices and smaller screens.
 
-    - registerServiceWorker.js XXXXXXXXXXXXXXXXXXXXX
+    - registerServiceWorker.js is a file automatically created when running 'create react app' in order to install the base folder structure for an app. There is no need to edit this file. 
    
   5- *client > src > Components*
+
+    - The Components > FakeData > fakeData.js file contains the optional conversation view that users can toggle in case their conversations require some measure of privacy.
+
     - The Components > messages > messages.js file contains the messageModel functions (written in Mongoose) for read/create/destroy calls to the MongoDB. These functions are accessed and called through messageModel function inside config > io.js. 
 
     - The Components > Routes > routes.js file defines what the URL will display for the to two main routes for the app. One is the default route for landing on the page and the other is the route for retrieving the db entries through the .get request. 
 
     - The Components > Savs > save.js file shows a currently unused function for moving the conversation to a different room (for example, if someone was invited by accident or otherwise accessed the unique URL of the room).
-
-    - The Components > rooms.js file contains code for socket.io to connect and use the .emit (broadcasts/sends a message to all users)and .on (listener for  messages from other users in this room) functions.
 
     - The Components > sendMessageBtn.js file passes the 'send' button, along with Materialize styling, to the React render()function. The entire sendMessageBtn function is exported through the SendMessageBtn export. 
 
@@ -74,6 +75,8 @@ The ReactChat app (deployed as On the Fly) was created by Adam Wallis (project l
     - The config > message.js file contains code that creates a DB for messages and establishes the schema for storing messages in MongoDB. Here, each message has a name (for the user), message (the text that's sent), a datestamp (for use in future development), and a room (to save it to the correct conversation in MongoDB). 
 
     - The config > room.js file creates a DB for each room and establishes the schema for storing rooms in MongoDB. Here, each message has a unique id and a timestamp. (This code is partially intended for future development of a feature that tracks users who are currently using a room.)
+
+    - The config > rooms.js file contains code for socket.io to connect and use the .emit (broadcasts/sends a message to all users)and .on (listener for  messages from other users in this room) functions.
 
   7- *ReactChat > routes*
     - The routes > api > index.js file tells express that we want to use the neighboring file's route functions in tandem with express route handling.
