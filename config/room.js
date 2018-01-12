@@ -1,8 +1,4 @@
-// Connect to connection.js file
 const mongoose = require("mongoose");
-// ORM
-
-  // Select all
   
 const Schema = mongoose.Schema;
 

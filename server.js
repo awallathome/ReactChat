@@ -51,7 +51,7 @@ ioConnect.on("connection", function(socket) {
   });
 });
 
-  //routes
+  //route for creating a room (happens immediately when entering the room)
   app.get("/api/room", function (req, res) {
     Room.create({})
       .then(function(dbRoom) {
@@ -59,6 +59,7 @@ ioConnect.on("connection", function(socket) {
       })
   });
 
+  //this code gets all messages from a room when entering it.
   app.get("/api/room/:id", function(req, res) {
     Room.find({ _id: req.params.id})
       .then(function(dbRoom) {
@@ -69,6 +70,7 @@ ioConnect.on("connection", function(socket) {
       })
   });
 
+  //this code gets each message that is sent after entering a room
   app.get("/api/messages", function(req, res) {
     Message.find(req.query)
       .then(function(dbMessages) {
@@ -76,6 +78,7 @@ ioConnect.on("connection", function(socket) {
       })
   })
 
+  //this code erases the whole conversation
   app.delete("/api/messages", function(req, res) {
     if (!req.query.room) return res.json({});
     Message.remove(req.query)

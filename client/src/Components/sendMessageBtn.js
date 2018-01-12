@@ -1,5 +1,7 @@
+// We are employing the Component.state feature from react which helps us handle different events. 
 import React, { Component } from "react";
 
+//For the send button, instead of using jQuery, we are styling the hover color through this.state to change as isHovered changes from true to false. Ideally, this will be cleaner if styled in App.css. 
 class SendMessageBtn extends Component {
   state = {
     isHovered: false
@@ -14,7 +16,7 @@ class SendMessageBtn extends Component {
       return "white blue-grey-text";
     }
   }
-
+//the SendMessageBtn element is styled here and rendered as an <button> object when imported into the App.js file
   render() {
     return <button onMouseEnter={() => this.setState({
             isHovered: true
@@ -31,5 +33,5 @@ class SendMessageBtn extends Component {
       </button>;
   }
 }
-
+//We export the SendMessageBtn that we created above for use within App.js
 export default SendMessageBtn;

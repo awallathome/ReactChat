@@ -1,8 +1,10 @@
 const router = require("express").Router();
+//The following object is currently unused, but is declared for future use. 
 const messageController = require("../../controllers/MessageController");
 
 // Matches with "/api/message"
-router.route("/")
+router
+  .route("/")
   .get(Message.find)
   .post(Message.create);
 

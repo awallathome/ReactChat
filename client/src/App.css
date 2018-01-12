@@ -1,4 +1,4 @@
-/* General */
+/* General styling for the container elements and fonts in the DOM */
 html {
   font-family: Quicksand, sans-serif;
 }
@@ -14,8 +14,7 @@ h6 {
 
 }
 
-/* Header */
-
+/* Elements at the top of the page */
 
 .nav-wrapper  {
   color: #2A3132;
@@ -80,7 +79,7 @@ button {
   float: right;
 }
 
-/* Input Field */
+/* Message input field */
 #message {
   padding-left: 20px;
   font-size: 18pt;
@@ -150,6 +149,8 @@ button {
   border-radius: 5px !important;
 
 }
+
+/*Responsive desiogn media queries for different size screens. */
 
 @media only screen and (max-width : 730px) {
 
