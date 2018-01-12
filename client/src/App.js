@@ -4,7 +4,7 @@ import axios from "axios";
 import { Button, Modal } from "react-materialize";
 import SendMessageBtn from "./Components/SendMsgBtn/sendMessageBtn";
 import fakeData from "./Components/FakeData/fakeData";
-
+import handleLogoClick from "./Components/Toggle/toggle.js";
 
 //Here we employ React's component.state property (by way of state.isReal) to track whethere the conversation that is displayed is the real or decoy converstaion.
 class App extends Component {
@@ -24,10 +24,10 @@ class App extends Component {
         this.setState({ data: fakeData, isReal: false });
       } else {
         this.setState({ isReal: true }, this.getMessages);
-      }
+      };
     }
   };
-
+  
 //The same function as above will run if the 'On the Fly' logo is tapped or clicked. This is a feature added specifically so that mobile users can have the same user experience as desktop users. 
   handleLogoClick = e => {
     if (this.state.isReal) {
