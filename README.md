@@ -3,11 +3,11 @@
 12/ 10/ 2018
 
 **CONTENTS**
--INTRODUCTIONS
--DESCRIPTION of On the Fly
--Future Improvements
--The Grand Tour of app code
--Running the application locally
+=INTRODUCTIONS
+=DESCRIPTION of On the Fly
+=Future Improvements
+=The Grand Tour of app code
+=Running the application locally
 
 **Introduction**
 

@@ -101,6 +101,7 @@ class App extends Component {
         this.socket.emit("room", roomId);
         this.socket.on("message", message => {
           
+  //It looks strange here to be interacting with the DOM directly. This was the quickest solution to a problem in the real message view when sending a new message. Without the code below, the text window defaults to scrolling back to the top where the oldest messages begin so that the latest messages are not visible. 
           if (this.state.isReal) {
             const messageDiv = document.querySelector("#messages");
             messageDiv.scrollTop = messageDiv.scrollHeight;
