@@ -4,7 +4,7 @@ import axios from "axios";
 import { Button, Modal } from "react-materialize";
 import SendMessageBtn from "./Components/SendMsgBtn/sendMessageBtn";
 import fakeData from "./Components/FakeData/fakeData";
-// import ProceedToChat from "./Components/IntroModal/IntroModal";
+import ProceedToChat from "./Components/IntroModal/IntroModal";
 
 //Here we employ React's component.state property (by way of state.isReal) to track whethere the conversation that is displayed is the real or decoy converstaion.
 class App extends Component {
@@ -17,8 +17,7 @@ class App extends Component {
 
 //This is supposed to define the callling of the intro modal
   introModal = () => {
-    
-    console.log("introModal");
+    ProceedToChat();
   };
 
 //Here, the esc key (key value 27) will run the below function to determine whether the isReal is set to True or False. If it is false it will set the state to true, and vice versa. 
@@ -98,7 +97,8 @@ class App extends Component {
         .then(res => (window.location.pathname = res.data._id));
     } else {
       this.init(() => {
-     
+        this.introModal();
+
         document.addEventListener("keydown", this.handleHideKeyPress);
 
         this.socket.emit("room", roomId);
@@ -178,7 +178,6 @@ class App extends Component {
               <div className="container">
                 <div className="row">
                   <div className="col s12 grey-text text-darken-2 white bubble" id="decoyMessages">
-                    {/*<p>{ToggleMessage}</p>*/}
                     <div style={{ padding: 10 }}>
                       <h6>this.username</h6>this.message
                     </div>

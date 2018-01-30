@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { Button, Modal } from "react-materialize";
   
 class ProceedToChat extends Component {
-    state = { 
-      userName: "#username" }
   
   render() {
-    return <Modal header="Welcome to On the Fly" trigger={Component.componentDidMount}>
+    return <Modal header="Welcome to On the Fly" >
                   
       <p>You will need a name for your session. </p>
       <p>Toggle between real and decoy conversations with the 'esc' key</p>
@@ -19,7 +17,7 @@ class ProceedToChat extends Component {
           </div>
 
           <div className="modal-footer">
-            <Button id="chat" type="button" className="btn btn-default" data-dismiss="modal" onclick="proceedToChat()">Chat</Button>  
+            <Button id="chat" type="button" className="btn btn-default" data-dismiss="modal" onclick={Component.setState({ username: "#username"})}>Chat</Button>  
           </div>
       <form/>
 
@@ -28,4 +26,3 @@ class ProceedToChat extends Component {
 };
 
 export default ProceedToChat; 
-
