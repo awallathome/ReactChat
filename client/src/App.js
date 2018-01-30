@@ -4,7 +4,7 @@ import axios from "axios";
 import { Button, Modal } from "react-materialize";
 import SendMessageBtn from "./Components/SendMsgBtn/sendMessageBtn";
 import fakeData from "./Components/FakeData/fakeData";
-import handleLogoClick from "./Components/Toggle/toggle.js";
+// import ProceedToChat from "./Components/IntroModal/IntroModal";
 
 //Here we employ React's component.state property (by way of state.isReal) to track whethere the conversation that is displayed is the real or decoy converstaion.
 class App extends Component {
@@ -13,6 +13,12 @@ class App extends Component {
     isReal: false,
     userName: "",
     message: ""
+  };
+
+//This is supposed to define the callling of the intro modal
+  introModal = () => {
+    
+    console.log("introModal");
   };
 
 //Here, the esc key (key value 27) will run the below function to determine whether the isReal is set to True or False. If it is false it will set the state to true, and vice versa. 
@@ -45,7 +51,7 @@ class App extends Component {
   };
 
 //The below function will erase the conversation from the database without eliminating the room itself. 
-  deleteChat = () =>{
+  deleteChat = () => {
     axios.delete("api/messages", { params: { room: this.props.match.params.id }})
       .then(this.getMessages);
   };
@@ -92,10 +98,7 @@ class App extends Component {
         .then(res => (window.location.pathname = res.data._id));
     } else {
       this.init(() => {
-        let user = prompt(
-          "ON THE FLY! \nYou will need a name for your session. Any name will do. \n \nToggle between real and decoy conversations with the <esc> key \nor by tapping on the Logo.\n"
-        );
-        this.setState({ userName: user });
+     
         document.addEventListener("keydown", this.handleHideKeyPress);
 
         this.socket.emit("room", roomId);
