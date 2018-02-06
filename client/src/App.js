@@ -17,8 +17,10 @@ class App extends Component {
 
 //This is supposed to define the callling of the intro modal
   introModal = () => {
-    ProceedToChat();
-  };
+    console.log("PTC");
+    return <ProceedToChat />
+  }
+ 
 
 //Here, the esc key (key value 27) will run the below function to determine whether the isReal is set to True or False. If it is false it will set the state to true, and vice versa. 
   handleHideKeyPress = e => {
@@ -132,6 +134,9 @@ class App extends Component {
 //All React Applications need a render function as below. What is inside the render function is sent to the 'root' element in the index.html page. 
   render() {
     return <div className="App">
+
+
+
         <div className="navbar-fixed">
           <nav>
             <div className="nav-wrapper #263238 blue-grey darken-4">
@@ -140,16 +145,16 @@ class App extends Component {
                   {/*This is the main page Logo*/}
                   <i className="material-icons">security</i>On the Fly
                 </a>
-            {/*This is the Delete button followed by the modal that appears when it is clicked.*/}
+                {/*This is the Delete button followed by the modal that appears when it is clicked.*/}
                 <Modal header="Erase all Messages" trigger={<button id="delete">
-                Delete Chat</button>}>
-                <p>Click 'Confirm' to permantly delete this conversation.<br>
-                </br> 
-            {/*This is the secondary confirmation button inside the delete modal.*/}
-               {<Button onClick={this.deleteChat}>confirm</Button>}
-              
-            {/*Below is a button for inviting people to the chat room followed by the modal that appears when clicked.*/}
-                </p>
+                      Delete Chat
+                    </button>}>
+                  <p>
+                    Click 'Confirm' to permantly delete this conversation.<br />
+                    {/*This is the secondary confirmation button inside the delete modal.*/}
+                    {<Button onClick={this.deleteChat}>confirm</Button>}
+                    {/*Below is a button for inviting people to the chat room followed by the modal that appears when clicked.*/}
+                  </p>
                 </Modal>
                 <Modal header="Copy/share this link to invite." trigger={<button id="invite">
                       Invite
@@ -163,8 +168,8 @@ class App extends Component {
                     </p>
                   </div>
                   <input id="roomLink" type="text" style={{ display: "none" }} defaultValue={`${window.location.origin}/${this.props.match.params.id}`} />
-            {/*The button below is currently unused until we decide to add an automated copy/paste option.*/}
-            {/*<button onClick={this.roomLink}>Copy Link</button>*/}
+                  {/*The button below is currently unused until we decide to add an automated copy/paste option.*/}
+                  {/*<button onClick={this.roomLink}>Copy Link</button>*/}
                 </Modal>
               </div>
             </div>
@@ -219,7 +224,7 @@ class App extends Component {
                     </div>
                     <div className="col s1 center">
                       {/*The button below is imported as an object from src > Components > sendMessageBtn */}
-                      <SendMessageBtn handleFormSubmit={this.handleFormSubmit}/>
+                      <SendMessageBtn handleFormSubmit={this.handleFormSubmit} />
                     </div>
                   </div>
                 </form>
