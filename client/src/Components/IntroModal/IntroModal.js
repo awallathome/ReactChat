@@ -1,36 +1,33 @@
 import React, { Component } from "react";
-import { Button, Modal } from "react-materialize";
+import { Button } from "react-materialize";
+import Modal from "react-modal";
   
 class ProceedToChat extends Component {
 
-  state = {
-    isOpen: true 
-  }
-    
   render() {
-    return (
-      <div id="introModal">
-        <Modal header="Welcome to On the Fly" >
-                      
+    return <div id="introModal">
+        <Modal isOpen={this.props.close}>
           <p>You will need a name for your session. </p>
-          <p>Toggle between real and decoy conversations with the 'esc' key</p>
+          <p>
+            Toggle between real and decoy conversations with the 'esc' key
+          </p>
           <p>or by tapping on the Logo.</p>
-        
-          <form className="form-inline"/>
-              
-              <div className="form-group">
-                <input type="text" className="form-control" id="username" placeholder="Any name will do!" />
-              </div>
 
-              <div className="modal-footer">
-                <Button id="chat" type="button" className="btn btn-default" data-dismiss="modal" onclick={this.setState({ username: "#username"})}>Start Talking</Button>  
-              </div>
+          <form className="form-inline" />
 
-          <form/>
+          <div className="form-group">
+            <input type="text" className="form-control" id="userName" placeholder="Any name will do!" onChange={this.props.handleInputChange} value={this.props.userName}/>
+          </div>
 
+          <div className="modal-footer">
+            <Button id="chat" type="button" className="btn btn-default" data-dismiss="modal" onClick={this.props.sendValue} >
+              Start Talking
+            </Button>
+          </div>
+
+          <form />
         </Modal>
-      </div>
-    )
+      </div>;
   }
 }
 

@@ -12,7 +12,8 @@ class App extends Component {
     data: fakeData,
     isReal: false,
     userName: "",
-    message: ""
+    message: "",
+    isOpen: true
   };
 
 //This is supposed to define the callling of the intro modal
@@ -44,8 +45,9 @@ class App extends Component {
     }
   };
 
-//Here we are keeping trackof the values inside of any field that can change. In this case, there is only one field that can; the message input field.
+//Here we are keeping track of the values inside of any field that can change. In this case, there is only one field that can; the message input field.
   handleInputChange = e => {
+    e.preventDefault();
     const value = e.target.value;
     const name = e.target.getAttribute("id");
     this.setState({ [name]: value });
@@ -69,6 +71,13 @@ class App extends Component {
         })
       );
   };
+
+//Here is where the "userName" state is updated to whatever the user inputs. 
+  sendValue = e => {
+    e.preventDefault();
+
+    this.setState({isOpen: false});
+  }
 
 //When the send button is clicked, the function below executes a socket.emit function to all users that will display for them new messages from other users.
   handleFormSubmit = e => {
@@ -99,7 +108,7 @@ class App extends Component {
         .then(res => (window.location.pathname = res.data._id));
     } else {
       this.init(() => {
-        this.introModal();
+        // this.introModal();
 
         document.addEventListener("keydown", this.handleHideKeyPress);
 
@@ -121,6 +130,7 @@ class App extends Component {
 //Here we are removing an event listener when it is no longer necessary to track 'this.state'
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleHideKeyPress);
+    this.setState({ userName: "" });
     
   }
 
@@ -133,8 +143,8 @@ class App extends Component {
 
 //All React Applications need a render function as below. What is inside the render function is sent to the 'root' element in the index.html page. 
   render() {
+console.log(this.state);
     return <div className="App">
-
 
 
         <div className="navbar-fixed">
@@ -231,6 +241,8 @@ class App extends Component {
               </div>
             </div>
           </div>
+
+          <ProceedToChat handleInputChange={this.handleInputChange} sendValue={this.sendValue} userName={this.state.userName} close ={this.state.isOpen}/>
         </footer>
       </div>;
   }
